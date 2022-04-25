@@ -30,19 +30,14 @@ class _ChatPageState extends State<ChatPage> {
         title: InkWell(
           onTap: () {},
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
-                height: 32,
-                width: 32,
-                child: const FlutterLogo(),
-              ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 6),
                 child: Text(
                   contact.nickname,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -60,43 +55,51 @@ class _ChatPageState extends State<ChatPage> {
         ],
       ),
       body: Container(
-        margin: const EdgeInsets.only(bottom: 50),
+        margin: const EdgeInsets.only(bottom: 40),
         child: ChatView(contact.chat),
       ),
-      bottomSheet: ListTile(
-        tileColor: Theme.of(context).cardColor,
-        title: TextField(
-          controller: textController,
-          focusNode: focusNode,
-          minLines: 1,
-          maxLines: 3,
-          decoration: const InputDecoration.collapsed(hintText: 'Сообщение'),
-          onChanged: (value) {
-            setState(() {
-              value.isEmpty ? isChanged = false : isChanged = true;
-            });
-          },
-        ),
-        trailing: isChanged
-            ? IconButton(
-                onPressed: () {
+      bottomSheet: Container(
+        color: Theme.of(context).cardColor,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            Flexible(
+              child: TextField(
+                controller: textController,
+                focusNode: focusNode,
+                minLines: 1,
+                maxLines: 3,
+                decoration:
+                    const InputDecoration(hintText: 'Сообщение', border: InputBorder.none),
+                onChanged: (value) {
                   setState(() {
-                    final Message message = Message(
-                      account.id!,
-                      contact.id,
-                      textController.value.text,
-                      DateTime.now(),
-                    );
-                    _cloudStore.addMessage(message);
-                    contact.chat.add(message);
-                    textController.clear();
-                    isChanged = false;
-                    focusNode.unfocus();
+                    value.isEmpty ? isChanged = false : isChanged = true;
                   });
                 },
-                icon: const Icon(Icons.send),
-              )
-            : null,
+              ),
+            ),
+            isChanged
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        final Message message = Message(
+                          account.id!,
+                          contact.id,
+                          textController.value.text,
+                          DateTime.now(),
+                        );
+                        _cloudStore.addMessage(message);
+                        contact.chat.add(message);
+                        textController.clear();
+                        isChanged = false;
+                        focusNode.unfocus();
+                      });
+                    },
+                    icon: const Icon(Icons.send),
+                  )
+                : const SizedBox(height: 30),
+          ],
+        ),
       ),
     );
   }

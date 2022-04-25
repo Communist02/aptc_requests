@@ -15,15 +15,26 @@ class MessagesPage extends StatefulWidget {
 class _MessagesPageState extends State<MessagesPage> {
   @override
   Widget build(BuildContext context) {
+    void chatCompany() async {
+      final CloudStore _cloudStore = CloudStore();
+      final contact =
+          await _cloudStore.getContact('dOhpCFe1XvNWqUBQviJMPz3bCfg1');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChatPage(contact),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Сообщения'),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          chatCompany();
+        },
         child: const Icon(Icons.chat_outlined),
       ),
       body: contactsView(),

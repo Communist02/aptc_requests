@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'requests.dart';
+import 'my_requests.dart';
 import 'profile.dart';
 import 'messages.dart';
 import 'settings.dart';
@@ -16,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   int _index = 0;
   final List<Widget> _pages = [
     const RequestsPage(),
+    const MyRequestsPage(),
     const ProfilePage(),
     const MessagesPage(),
     const SettingsPage(),
@@ -44,6 +46,11 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.assignment_turned_in_outlined),
             selectedIcon: Icon(Icons.assignment_turned_in),
             label: 'Заявки',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.library_add_check_outlined),
+            selectedIcon: Icon(Icons.library_add_check),
+            label: 'Мои заявки',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outlined),

@@ -81,6 +81,30 @@ class CloudStore {
     return true;
   }
 
+  Future<List<Request>> getMyRequests() async {
+    final CollectionReference requestsBase = firestore.collection('requests');
+    final result = await requestsBase
+        .where('idAccount', isEqualTo: account.id.toString())
+        .get();
+    List<Request> requests = [];
+    for (var request in result.docs) {
+      requests.add(Request(
+        request['description'],
+        jsonDecode(request['value']),
+        DateTime.fromMillisecondsSinceEpoch(request['dateTime'].seconds * 1000),
+        id: request.id,
+      ));
+    }
+    requests.sort((a, b) => b.dateTime.compareTo(a.dateTime));
+    return requests;
+  }
+
+  Future<bool> removeRequest(String id) async {
+    final CollectionReference requestsBase = firestore.collection('requests');
+    requestsBase.doc(id).delete();
+    return true;
+  }
+
   Future<Contacts> getContacts() async {
     final CollectionReference chatsBase = firestore.collection('messages');
     final CollectionReference accountsBase = firestore.collection('accounts');
@@ -91,8 +115,6 @@ class CloudStore {
         .where('idRecipient', isEqualTo: account.id.toString())
         .get();
     Contacts contacts = Contacts([]);
-    print(firstMessagesResult.docs.length);
-    print(secondMessagesResult.docs.length);
     for (final message in firstMessagesResult.docs) {
       final messageTMP = Message(
         message['idSender'],
@@ -102,7 +124,8 @@ class CloudStore {
       );
       if (!contacts.addMessage(messageTMP, true)) {
         final acc = await accountsBase.doc(messageTMP.idRecipient).get();
-        contacts.addContact(messageTMP, messageTMP.idRecipient, acc['nickname']);
+        contacts.addContact(
+            messageTMP, messageTMP.idRecipient, acc['nickname']);
       }
     }
     for (final message in secondMessagesResult.docs) {
@@ -114,8 +137,7 @@ class CloudStore {
       );
       if (!contacts.addMessage(messageTMP, false)) {
         final acc = await accountsBase.doc(messageTMP.idSender).get();
-        contacts.addContact(
-            messageTMP, messageTMP.idSender, acc['nickname']);
+        contacts.addContact(messageTMP, messageTMP.idSender, acc['nickname']);
       }
     }
     contacts.sortMessages();

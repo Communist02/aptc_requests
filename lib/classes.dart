@@ -12,6 +12,15 @@ class Account {
   }
 }
 
+class Request {
+  String id;
+  String description;
+  Map value;
+  DateTime dateTime;
+
+  Request(this.description, this.value, this.dateTime, {this.id = ''});
+}
+
 class Message {
   String idSender;
   String idRecipient;
