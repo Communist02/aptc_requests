@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "182561817454",
+    "project_id": "aptc-base",
+    "storage_bucket": "aptc-base.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182561817454:android:07fb8984b5e41c8007377f",
+        "android_client_info": {
+          "package_name": "com.aptc.aptc_requests"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182561817454-5824gcmnlh1eiq26v1cbc5slehpsimud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwb7wfHs1Q8vmCMafEdA-3CMSHqlBUlA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182561817454-5824gcmnlh1eiq26v1cbc5slehpsimud.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
