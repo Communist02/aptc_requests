@@ -1,7 +1,9 @@
-import 'package:aptc_requests/ship.dart';
 import 'package:flutter/material.dart';
-import 'container.dart';
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
+import 'container.dart';
+import 'ship.dart';
+import 'custom.dart';
+
 
 class RequestsPage extends StatefulWidget {
   const RequestsPage({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class _RequestsPageState extends State<RequestsPage> {
   final List<Widget> _pages = [
     const ContainerPage(),
     const ShipPage(),
+    const CustomPage(),
   ];
 
   @override
@@ -36,6 +39,9 @@ class _RequestsPageState extends State<RequestsPage> {
               ),
               Tab(
                 text: 'Выделенное судно',
+              ),
+              Tab(
+                text: 'Своя заявка',
               ),
             ],
           ),

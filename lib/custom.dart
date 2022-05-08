@@ -2,96 +2,20 @@ import 'package:flutter/material.dart';
 import 'firebase.dart';
 import 'global.dart';
 
-class ShipPage extends StatefulWidget {
-  const ShipPage({Key? key}) : super(key: key);
+class CustomPage extends StatefulWidget {
+  const CustomPage({Key? key}) : super(key: key);
 
   @override
-  _ShipPageState createState() => _ShipPageState();
+  _CustomPageState createState() => _CustomPageState();
 }
 
 Map<String, String> _request = {};
 
-class _ShipPageState extends State<ShipPage> {
+class _CustomPageState extends State<CustomPage> {
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Card(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6),
-                  child: TextFormField(
-                    initialValue: _request['Откуда'],
-                    decoration: const InputDecoration(
-                      labelText: 'Откуда',
-                      hintText: 'г. Владивосток',
-                      border: OutlineInputBorder(),
-                    ),
-                    onChanged: (value) {
-                      _request['Откуда'] = value.trim();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Card(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6),
-                  child: TextFormField(
-                    initialValue: _request['Куда'],
-                    decoration: const InputDecoration(
-                      labelText: 'Куда',
-                      border: OutlineInputBorder(),
-                    ),
-                    onChanged: (value) {
-                      _request['Куда'] = value.trim();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Card(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6),
-                  child: TextFormField(
-                    initialValue: _request['Когда'],
-                    decoration: const InputDecoration(
-                      labelText: 'Когда',
-                      border: OutlineInputBorder(),
-                    ),
-                    onChanged: (value) {
-                      _request['Когда'] = value.trim();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
         Card(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           shape:
@@ -158,20 +82,19 @@ class _ShipPageState extends State<ShipPage> {
                   child: TextFormField(
                     minLines: 4,
                     maxLines: 6,
-                    initialValue: _request['Комментарий'],
+                    initialValue: _request['Заявка'],
                     decoration: const InputDecoration(
-                      labelText: 'Комментарий к заявке',
-                      hintText:
-                          'Пример комментария: выезд под арку не выше трех метров, ящики грузить не более чем в два яруса...',
+                      labelText: 'Текст заявки',
+                      hintText: 'Введите вашу заявку',
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) {
-                      _request['Комментарий'] = value.trim();
+                      _request['Заявка'] = value.trim();
                     },
                   ),
                 ),
                 const Text(
-                    'Указаная здесь информация о необходимости заказа пропуска, записи на отгузку, согласования с отправителем учитываться не будет'),
+                    'Здесь напишите вашу заяку, что вам необходимо, все возможные условия'),
               ],
             ),
           ),
@@ -192,7 +115,7 @@ class _ShipPageState extends State<ShipPage> {
                 : () async {
                     final CloudStore cloudStore = CloudStore();
                     await cloudStore.addRequest(
-                      'Выделение судна',
+                      'Уникальная заявка',
                       _request,
                       DateTime.now(),
                     );

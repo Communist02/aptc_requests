@@ -149,7 +149,7 @@ class NotAccount extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: InkWell(
-          onTap: () => context.read<ChangeNavigation>().change(4),
+          onTap: () => context.read<ChangeNavigation>().change(2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [

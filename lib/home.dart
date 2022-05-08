@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'state_update.dart';
 import 'requests.dart';
 import 'my_requests.dart';
 import 'profile.dart';
@@ -30,6 +32,9 @@ class _HomePageState extends State<HomePage> {
         statusBarColor: Colors.transparent,
       ),
     );
+    if (context.watch<ChangeNavigation>().getSwitch) {
+      _index = context.watch<ChangeNavigation>().getIndex;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           NavigationDestination(
             icon: Icon(Icons.assignment_turned_in_outlined),
             selectedIcon: Icon(Icons.assignment_turned_in),
-            label: 'Заявки',
+            label: 'Заявка',
           ),
           NavigationDestination(
             icon: Icon(Icons.library_add_check_outlined),

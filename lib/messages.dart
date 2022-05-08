@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'classes.dart';
 import 'global.dart';
 import 'chat.dart';
 import 'firebase.dart';
+import 'state_update.dart';
 
 class MessagesPage extends StatefulWidget {
   const MessagesPage({Key? key}) : super(key: key);
@@ -31,13 +33,23 @@ class _MessagesPageState extends State<MessagesPage> {
       appBar: AppBar(
         title: const Text('Сообщения'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          chatCompany();
-        },
-        child: const Icon(Icons.chat_outlined),
-      ),
-      body: contactsView(),
+      floatingActionButton: account.id != null
+          ? FloatingActionButton(
+              onPressed: () {
+                chatCompany();
+              },
+              child: const Icon(Icons.chat_outlined),
+            )
+          : null,
+      body: account.id != null
+          ? RefreshIndicator(
+              onRefresh: () async {
+                await Future.delayed(const Duration(seconds: 1));
+                setState(() {});
+              },
+              child: contactsView(),
+            )
+          : const NotAccount(),
     );
   }
 }
@@ -168,4 +180,30 @@ FutureBuilder contactsView() {
       }
     },
   );
+}
+
+class NotAccount extends StatelessWidget {
+  const NotAccount({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: double.infinity,
+        child: InkWell(
+          onTap: () => context.read<ChangeNavigation>().change(2),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Icon(Icons.person_outline_rounded, size: 150),
+              Text(
+                'Войдите в аккаунт',
+                style: TextStyle(fontSize: 20, fontFamily: 'BalsamiqSans'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
