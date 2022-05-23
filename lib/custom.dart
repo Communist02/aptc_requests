@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'firebase.dart';
 import 'global.dart';
 
+Map<String, String> _request = {};
+
 class CustomPage extends StatefulWidget {
   const CustomPage({Key? key}) : super(key: key);
 
   @override
   _CustomPageState createState() => _CustomPageState();
 }
-
-Map<String, String> _request = {};
 
 class _CustomPageState extends State<CustomPage> {
   @override

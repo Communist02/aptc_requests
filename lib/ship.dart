@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'firebase.dart';
 import 'global.dart';
 
+Map<String, String> _request = {};
+
 class ShipPage extends StatefulWidget {
   const ShipPage({Key? key}) : super(key: key);
 
   @override
   _ShipPageState createState() => _ShipPageState();
 }
-
-Map<String, String> _request = {};
 
 class _ShipPageState extends State<ShipPage> {
   @override
