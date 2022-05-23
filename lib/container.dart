@@ -238,7 +238,7 @@ class _ContainerPageState extends State<ContainerPage> {
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 6),
                   child: TextFormField(
-                    initialValue: _request['E-mail'],
+                    initialValue: _request['Email'],
                     decoration: const InputDecoration(
                       labelText: 'Email для связи и уведомлений',
                       border: OutlineInputBorder(),

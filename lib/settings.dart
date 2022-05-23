@@ -21,8 +21,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
         title: const Text('Настройки'),
       ),
       body: ListView(
@@ -84,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
             child: const ListTile(
               title: Text('АТТК - Заявки на перевозку'),
-              subtitle: Text('Версия 0.1 Alpha'),
+              subtitle: Text('Версия 0.9 Beta'),
             ),
           ),
         ],

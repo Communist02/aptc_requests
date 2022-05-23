@@ -41,10 +41,11 @@ class RequestPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Row(
-              children: [
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
                 Text(
-                  request.description,
-                  style: const TextStyle(
+                  'Ваша заявка',
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -57,42 +58,41 @@ class RequestPage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 8, bottom: 8, right: 10),
             child: ElevatedButton(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(90),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(90),
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                showDialog<String>(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('Подтверждение удаления'),
-                    content: const Text('Вы хотите удалить ваш заказ?'),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(21)),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'true'),
-                        child: const Text('Да'),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'false'),
-                        child: const Text('Нет'),
-                      ),
-                    ],
-                  ),
-                ).then((value) async {
-                  if (value == 'true') {
-                    final CloudStore cloudStore = CloudStore();
-                    await cloudStore.removeRequest(request.id);
-                    Navigator.pop(context);
-                  }
-                });
-              },
-              child: const Text('Удалить')
-            ),
+                onPressed: () {
+                  showDialog<String>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Подтверждение удаления'),
+                      content: const Text('Вы хотите удалить ваш заказ?'),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(21)),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'true'),
+                          child: const Text('Да'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'false'),
+                          child: const Text('Нет'),
+                        ),
+                      ],
+                    ),
+                  ).then((value) async {
+                    if (value == 'true') {
+                      final CloudStore cloudStore = CloudStore();
+                      await cloudStore.removeRequest(request.id);
+                      Navigator.pop(context);
+                    }
+                  });
+                },
+                child: const Text('Удалить')),
           ),
         ],
       ),

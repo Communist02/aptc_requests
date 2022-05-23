@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           create: (context) => ChangeTheme(),
           builder: (BuildContext context, _) {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'АТТК - Заявки',
               themeMode:
                   AppThemes().getMode(context.watch<ChangeTheme>().getTheme),

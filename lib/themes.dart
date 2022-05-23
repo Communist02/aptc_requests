@@ -21,22 +21,14 @@ class AppThemes {
       colorSchemeSeed: primaryColor,
       indicatorColor: primaryColor,
       cardColor: cardColor,
-      appBarTheme: const AppBarTheme(
-        elevation: 0,
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
-      ),
       tabBarTheme: const TabBarTheme(
         labelColor: Colors.black,
         unselectedLabelColor: Colors.black,
       ),
-      navigationBarTheme: NavigationBarThemeData(
+      navigationBarTheme: const NavigationBarThemeData(
         indicatorColor: primaryColor,
         backgroundColor: cardColor,
         height: 64,
-        labelTextStyle: MaterialStateProperty.all(
-          const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-        ),
       ),
     );
   }
@@ -51,15 +43,9 @@ class AppThemes {
       colorSchemeSeed: primaryColor,
       indicatorColor: primaryColor,
       cardColor: cardColor,
-      appBarTheme: const AppBarTheme(
-        elevation: 0,
-      ),
-      navigationBarTheme: NavigationBarThemeData(
+      navigationBarTheme: const NavigationBarThemeData(
         indicatorColor: primaryColor,
         height: 64,
-        labelTextStyle: MaterialStateProperty.all(
-          const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-        ),
       ),
     );
   }

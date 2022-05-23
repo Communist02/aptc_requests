@@ -35,7 +35,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
     }
   }
 
-  InkWell orderView(Request request) {
+  InkWell requestView(Request request) {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -46,7 +46,6 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
         ).then((value) => setState(() {}));
       },
       child: Card(
-        elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         child: Padding(
@@ -112,7 +111,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, int i) {
-                  return orderView(snapshot.data[i]);
+                  return requestView(snapshot.data[i]);
                 },
               );
             }
@@ -125,7 +124,7 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Мои заказы'),
+        title: const Text('Мои заявки'),
       ),
       body: account.id != null
           ? RefreshIndicator(
