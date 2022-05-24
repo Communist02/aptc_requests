@@ -21,15 +21,15 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
     final DateTime timeNow = DateTime.now();
     final Duration difference = timeNow.difference(dateTime);
     if (difference.inMinutes < 1) {
-      return difference.inSeconds.toString() + ' сек. назад';
+      return '${difference.inSeconds} сек. назад';
     } else if (difference.inHours < 1) {
-      return difference.inMinutes.toString() + ' мин. назад';
+      return '${difference.inMinutes} мин. назад';
     } else if (difference.inDays < 1) {
-      return difference.inHours.toString() + ' ч. назад';
+      return '${difference.inHours} ч. назад';
     } else if (difference.inDays < 2) {
       return 'Вчера';
     } else if (difference.inDays < 7) {
-      return difference.inDays.toString() + ' д. назад';
+      return '${difference.inDays} д. назад';
     } else {
       return DateFormat('dd.MM.yyyy').format(dateTime);
     }
