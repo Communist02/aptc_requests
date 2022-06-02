@@ -124,7 +124,7 @@ class ContactView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          dateTime(lastMessage!.dateTime),
+                          dateTime(lastMessage.dateTime),
                           style: TextStyle(
                             color: Theme.of(context).textTheme.caption!.color,
                           ),
