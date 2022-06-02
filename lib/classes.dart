@@ -37,12 +37,8 @@ class Contact {
 
   Contact(this.id, this.nickname, this.chat);
 
-  Message? lastMessage() {
-    if (chat.isNotEmpty) {
-      return chat[chat.length - 1];
-    } else {
-      return null;
-    }
+  Message lastMessage() {
+    return chat[chat.length - 1];
   }
 
   addMessage(String idSender, String value) {
@@ -64,8 +60,7 @@ class Contacts {
       if (isYou && message.idRecipient == contact.id) {
         contact.chat.add(message);
         return true;
-      }
-      else if (message.idSender == contact.id) {
+      } else if (message.idSender == contact.id) {
         contact.chat.add(message);
         return true;
       }
@@ -81,5 +76,7 @@ class Contacts {
     for (int i = 0; i < contacts.length; i++) {
       contacts[i].chat.sort((a, b) => a.dateTime.compareTo(b.dateTime));
     }
+    contacts.sort(
+        (a, b) => b.lastMessage().dateTime.compareTo(a.lastMessage().dateTime));
   }
 }

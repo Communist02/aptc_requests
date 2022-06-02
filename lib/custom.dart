@@ -18,10 +18,8 @@ class _CustomPageState extends State<CustomPage> {
       children: [
         Card(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(14),
             child: Column(
               children: [
                 Container(
@@ -71,10 +69,8 @@ class _CustomPageState extends State<CustomPage> {
         ),
         Card(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(14),
             child: Column(
               children: [
                 Container(
@@ -103,13 +99,6 @@ class _CustomPageState extends State<CustomPage> {
           height: 70,
           padding: const EdgeInsets.all(10),
           child: ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(90),
-                ),
-              ),
-            ),
             onPressed: account.id == null
                 ? null
                 : () async {
@@ -119,6 +108,7 @@ class _CustomPageState extends State<CustomPage> {
                       _request,
                       DateTime.now(),
                     );
+                    if (!mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Заказ создан'),
                       duration: Duration(seconds: 1),

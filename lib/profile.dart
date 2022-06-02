@@ -32,13 +32,6 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 70,
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: OutlinedButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(19),
-                ),
-              ),
-            ),
             child: const Text('ВЫЙТИ', style: TextStyle(fontSize: 15)),
             onPressed: () async {
               final AuthService authService = AuthService();
@@ -119,13 +112,6 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 70,
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(90),
-                ),
-              ),
-            ),
             onPressed: () async {
               final AuthService authService = AuthService();
               if (await authService.signEmailPassword(_email, _password)) {
@@ -324,13 +310,6 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 70,
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(90),
-                ),
-              ),
-            ),
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 final AuthService authService = AuthService();
@@ -412,13 +391,6 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 70,
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: ElevatedButton(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(90),
-                ),
-              ),
-            ),
             onPressed: () async {
               final AuthService authService = AuthService();
               if (await authService.resetPassword(_email)) {

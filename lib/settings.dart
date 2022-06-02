@@ -27,8 +27,6 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           Card(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
             child: InkWell(
               child: ListTile(
                 leading: const Icon(Icons.color_lens_outlined, size: 34),
@@ -78,8 +76,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Card(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
             child: const ListTile(
               title: Text('АТТК - Заявки на перевозку'),
               subtitle: Text('Версия 0.9 Beta'),

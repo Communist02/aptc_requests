@@ -58,47 +58,48 @@ class _ChatPageState extends State<ChatPage> {
         margin: const EdgeInsets.only(bottom: 40),
         child: ChatView(contact.chat),
       ),
-      bottomSheet: Container(
-        color: Theme.of(context).cardColor,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: [
-            Flexible(
-              child: TextField(
-                controller: textController,
-                focusNode: focusNode,
-                minLines: 1,
-                maxLines: 3,
-                decoration:
-                    const InputDecoration(hintText: 'Сообщение', border: InputBorder.none),
-                onChanged: (value) {
-                  setState(() {
-                    value.isEmpty ? isChanged = false : isChanged = true;
-                  });
-                },
+      bottomSheet: Card(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Row(
+            children: [
+              Flexible(
+                child: TextField(
+                  controller: textController,
+                  focusNode: focusNode,
+                  minLines: 1,
+                  maxLines: 3,
+                  decoration: const InputDecoration(
+                      hintText: 'Сообщение', border: InputBorder.none),
+                  onChanged: (value) {
+                    setState(() {
+                      value.isEmpty ? isChanged = false : isChanged = true;
+                    });
+                  },
+                ),
               ),
-            ),
-            isChanged
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        final Message message = Message(
-                          account.id!,
-                          contact.id,
-                          textController.value.text,
-                          DateTime.now(),
-                        );
-                        _cloudStore.addMessage(message);
-                        contact.chat.add(message);
-                        textController.clear();
-                        isChanged = false;
-                        focusNode.unfocus();
-                      });
-                    },
-                    icon: const Icon(Icons.send),
-                  )
-                : const SizedBox(height: 30),
-          ],
+              isChanged
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          final Message message = Message(
+                            account.id!,
+                            contact.id,
+                            textController.value.text,
+                            DateTime.now(),
+                          );
+                          _cloudStore.addMessage(message);
+                          contact.chat.add(message);
+                          textController.clear();
+                          isChanged = false;
+                          focusNode.unfocus();
+                        });
+                      },
+                      icon: const Icon(Icons.send),
+                    )
+                  : const SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
@@ -121,9 +122,7 @@ class MessageView extends StatelessWidget {
         children: [
           Flexible(
             child: Card(
-              elevation: 0,
-              color:
-                  isYou ? Colors.deepPurpleAccent : Theme.of(context).cardColor,
+              color: isYou ? Colors.deepPurpleAccent : null,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(13),
@@ -196,12 +195,18 @@ class ChatView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Card(
-            elevation: 0,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-              child: Center(child: Text(text)),
+              child: Center(
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.caption!.color,
+                  ),
+                ),
+              ),
             ),
           ),
         ],

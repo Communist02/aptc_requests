@@ -46,7 +46,6 @@ class _MyRequestsPageState extends State<MyRequestsPage> {
         ).then((value) => setState(() {}));
       },
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         child: Padding(
           padding: const EdgeInsets.all(10),
