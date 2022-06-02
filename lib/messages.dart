@@ -18,9 +18,10 @@ class _MessagesPageState extends State<MessagesPage> {
   @override
   Widget build(BuildContext context) {
     void chatCompany() async {
-      final CloudStore _cloudStore = CloudStore();
+      final CloudStore cloudStore = CloudStore();
       final contact =
-          await _cloudStore.getContact('dOhpCFe1XvNWqUBQviJMPz3bCfg1');
+          await cloudStore.getContact('dOhpCFe1XvNWqUBQviJMPz3bCfg1');
+      if (!mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -66,15 +67,15 @@ class ContactView extends StatelessWidget {
     final DateTime timeNow = DateTime.now();
     final Duration difference = timeNow.difference(dateTime);
     if (difference.inMinutes < 1) {
-      return difference.inSeconds.toString() + ' сек. назад';
+      return '${difference.inSeconds} сек. назад';
     } else if (difference.inHours < 1) {
-      return difference.inMinutes.toString() + ' мин. назад';
+      return '${difference.inMinutes} мин. назад';
     } else if (difference.inDays < 1) {
-      return difference.inHours.toString() + ' ч. назад';
+      return '${difference.inHours} ч. назад';
     } else if (difference.inDays < 2) {
       return 'Вчера';
     } else if (difference.inDays < 7) {
-      return difference.inDays.toString() + ' д. назад';
+      return '${difference.inDays} д. назад';
     } else {
       return DateFormat('dd.MM.yyyy').format(dateTime);
     }
@@ -150,10 +151,10 @@ class ContactView extends StatelessWidget {
 }
 
 FutureBuilder contactsView() {
-  final CloudStore _cloudStore = CloudStore();
+  final CloudStore cloudStore = CloudStore();
 
   return FutureBuilder(
-    future: _cloudStore.getContacts(),
+    future: cloudStore.getContacts(),
     initialData: globalContacts,
     builder: (BuildContext context, AsyncSnapshot snapshot) {
       switch (snapshot.connectionState) {
@@ -170,7 +171,6 @@ FutureBuilder contactsView() {
             globalContacts = snapshot.data;
             return ListView.builder(
               key: const PageStorageKey('MyOrders'),
-              padding: const EdgeInsets.symmetric(vertical: 5),
               itemCount: snapshot.data.contacts.length,
               itemBuilder: (context, int i) {
                 return ContactView(snapshot.data.contacts[i]);
