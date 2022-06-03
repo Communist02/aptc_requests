@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'classes.dart';
 import 'package:intl/intl.dart';
 import 'global.dart';
@@ -26,25 +27,8 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
-        title: InkWell(
-          onTap: () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 6),
-                child: Text(
-                  contact.nickname,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        centerTitle: true,
+        title: Text(contact.nickname),
         actions: [
           PopupMenuButton(itemBuilder: (context) {
             return [
@@ -115,7 +99,12 @@ class MessageView extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isYou = message.idSender == account.id;
     return InkWell(
-      onLongPress: () {},
+      onLongPress: () {
+        Clipboard.setData(ClipboardData(text: message.value));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Скопировано в буфер обмена'),
+        ));
+      },
       child: Row(
         mainAxisAlignment:
             isYou ? MainAxisAlignment.end : MainAxisAlignment.start,
