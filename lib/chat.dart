@@ -44,7 +44,7 @@ class _ChatPageState extends State<ChatPage> {
       ),
       bottomSheet: Card(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10, right: 4),
           child: Row(
             children: [
               Flexible(
